@@ -1,6 +1,7 @@
 import utils
 from read_csv import read_csv
 import charts
+import pandas as pd
 
 data = [
   {
@@ -41,7 +42,16 @@ def run():
   #result_list = utils.population_by_country_list(data, country)
   
   #print(result_list)
+  
+def charts_with_pandas():
+    df = pd.read_csv('./data.csv')
+    df = df[df['Continent'] == 'Africa']
+    
+    countries = df['Country/Territory'].values
+    percentages = df['World Population Percentage'].values
+    charts.generate_pie_chart_img('Africa', countries, percentages)
+    
 #ENTRY POINT
 #Controla si se esta ejecutando el archivo directamente desde el terminal y siempre se usa al final del documento o del bloque que se quiere ejecutar
 if __name__ == '__main__':
-    run()
+    charts_with_pandas()
